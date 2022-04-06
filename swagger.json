@@ -1,0 +1,229 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "the purpose of this application is to provide an application\nthat is using plain go code to define an API",
+    "title": "API.",
+    "version": "0.0.1"
+  },
+  "host": "localhost:8000",
+  "paths": {
+    "/student": {
+      "post": {
+        "description": "Returns new Student",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Student"
+        ],
+        "summary": "Add new Student",
+        "operationId": "addstudent",
+        "parameters": [
+          {
+            "description": "add Student data",
+            "name": "Student",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Student response",
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          },
+          "405": {
+            "description": "Method not allowed"
+          }
+        }
+      }
+    },
+    "/student/{id}": {
+      "delete": {
+        "description": "delete student",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Student"
+        ],
+        "operationId": "deleteStudent",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "bad request"
+          },
+          "410": {
+            "description": "status gone"
+          }
+        }
+      }
+    },
+    "/students": {
+      "get": {
+        "description": "Returns existing Student",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Student"
+        ],
+        "summary": "Get Student",
+        "operationId": "GetStudent",
+        "responses": {
+          "200": {
+            "description": "Student data",
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          },
+          "204": {
+            "description": "No content"
+          }
+        }
+      }
+    },
+    "/students/{id}": {
+      "get": {
+        "description": "Returns existing Student filtered by id",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Student"
+        ],
+        "summary": "Get Student",
+        "operationId": "GetStudentbyid",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Student data",
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "put": {
+        "description": "Update existing Student filtered by id",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Student"
+        ],
+        "summary": "Update Student",
+        "operationId": "Updatestudent",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "add Student data",
+            "name": "name",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Student response",
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          },
+          "201": {
+            "description": "create"
+          },
+          "400": {
+            "description": "bad request, invalid id"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ObjectID": {
+      "type": "array",
+      "title": "ObjectID is the BSON ObjectID type.",
+      "items": {
+        "type": "integer",
+        "format": "uint8"
+      },
+      "x-go-package": "go.mongodb.org/mongo-driver/bson/primitive"
+    },
+    "Student": {
+      "type": "object",
+      "title": "Student ...",
+      "properties": {
+        "Year_Of_Admission": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "YearOfAdmission"
+        },
+        "_id": {
+          "$ref": "#/definitions/ObjectID"
+        },
+        "city": {
+          "type": "string",
+          "x-go-name": "City"
+        },
+        "country": {
+          "type": "string",
+          "x-go-name": "Country"
+        },
+        "course": {
+          "type": "string",
+          "x-go-name": "Course"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        }
+      },
+      "x-go-package": "RESTAPI/models"
+    }
+  }
+}
