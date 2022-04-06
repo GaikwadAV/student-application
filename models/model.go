@@ -2,7 +2,7 @@ package model
 
 import "go.mongodb.org/mongo-driver/bson/primitive"
 
-// student structure
+// Student ...
 // swagger:model
 type Student struct {
 	ID              primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
